@@ -1269,11 +1269,31 @@
           });
         }
         /* ================= sound ================= */
-        var soundOn = true, actx = null;
+        var soundOn = true, actx = null, sfxBus = null;
+        /* 整体音效音量：1 = 满格。全屋音效统一经这条总线出去，
+           总增益就是 1.0；总线后接一个压缩器兜底，多音叠加时
+           自动压住峰值，不破音不爆音。背景音乐走 <audio> 元素，
+           不经这条总线，音量保持 0.5 不变 */
+        var SFX_VOLUME = 1.0;
         function ac(){
           if(!actx){ try{ actx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ actx = null; } }
           if(actx && actx.state === "suspended"){ actx.resume(); }
           return actx;
+        }
+        function sfxOut(c){
+          if(!sfxBus){
+            sfxBus = c.createGain();
+            sfxBus.gain.value = SFX_VOLUME;
+            var comp = c.createDynamicsCompressor();
+            comp.threshold.value = -12;
+            comp.knee.value = 20;
+            comp.ratio.value = 12;
+            comp.attack.value = 0.003;
+            comp.release.value = 0.2;
+            sfxBus.connect(comp);
+            comp.connect(c.destination);
+          }
+          return sfxBus;
         }
         function tone(freq, t0, dur, type, vol){
           if(!soundOn) return;
@@ -1282,12 +1302,12 @@
           o.type = type || "sine"; o.frequency.value = freq;
           var start = c.currentTime + t0;
           g.gain.setValueAtTime(0.0001, start);
-          /* 音效整体上调约四成半：所有音效都经 tone() 这一处，
-             统一乘 1.45 并封顶 0.24 —— 最高的单音约 0.16，
-             双音叠加也远低于破音线 */
-          g.gain.exponentialRampToValueAtTime(Math.min(0.24, (vol || 0.12) * 1.45), start + 0.015);
+          /* 单音峰值按满格标度：原来是 vol × 1.45（最高约 0.16），
+             现在统一放大到接近满幅，封顶 0.8 给叠音留余量，
+             再由总线上的压缩器兜底封顶 */
+          g.gain.exponentialRampToValueAtTime(Math.min(0.8, (vol || 0.12) * 7.3), start + 0.015);
           g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
-          o.connect(g); g.connect(c.destination);
+          o.connect(g); g.connect(sfxOut(c));
           o.start(start); o.stop(start + dur + 0.05);
         }
         function sndSwap(){ tone(340, 0, 0.09, "triangle", 0.10); }
