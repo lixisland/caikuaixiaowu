@@ -590,13 +590,13 @@
       .flytile.frogimg[data-color="0"] .face .skin-img{ transform:scale(1.18); }
       .flytile.glassimg .edge{ border-radius:28px; }
       .flytile.eggimg .edge, .flytile.frogimg .edge{ display:none; }
-      .ptile.toolflash .face, .ttile.toolflash .face{ animation:toolflash .22s ease; }
+      .ptile.toolflash .face, .ttile.toolflash .face{ animation:toolflash .4s ease; }
       @keyframes toolflash{
         0%{ transform:scale(1); filter:brightness(1); }
         45%{ transform:scale(1.15); filter:brightness(1.35); }
         100%{ transform:scale(1); filter:brightness(1); }
       }
-      .ptile.shufflewob{ animation:pshuffle .45s ease-in-out; }
+      .ptile.shufflewob{ animation:pshuffle .8s ease-in-out; }
       @keyframes pshuffle{
         0%{ margin-top:0; }
         30%{ margin-top:-7px; }
@@ -2692,7 +2692,7 @@
              弧线飞回它在堆里的原位（原 fx / fy / rot 从没动
              过），落定那一刻才把真块放回去并重判压住关系
              （变暗 / 变亮随之刷新），落位声也在落定那一刻响。
-             全程约 440ms，busy 锁住点击 */
+             全程约 800ms，busy 锁住点击 */
           P.busy = true;
           var fly = null;
           if(P.trayEls[id]) fly = makeFlyer(P.trayEls[id], 0);
@@ -2712,7 +2712,7 @@
             P.busy = false;
           }
           if(fly){
-            flyArc(fly, { x: pa.left + pr.x, y: pa.top + pr.y, w: pr.w, h: pr.h, rot: b.rot || 0, dur: 440, pop: false }, land);
+            flyArc(fly, { x: pa.left + pr.x, y: pa.top + pr.y, w: pr.w, h: pr.h, rot: b.rot || 0, dur: 800, pop: false }, land);
           } else {
             land();
           }
@@ -2791,9 +2791,9 @@
             return;
           }
           /* 动画：目标色在槽里和堆里的全部块先一起微微放大闪
-             一下（.toolflash 约 220ms），随即各自克隆成飞行块、
+             一下（.toolflash 约 400ms），随即各自克隆成飞行块、
              真块藏起来，全部同时汇聚飞向堆中心上方一点，收尾
-             成组缩小淡出（约 260ms，和槽里凑齐消除的 pop 一个
+             成组缩小淡出（约 470ms，和槽里凑齐消除的 pop 一个
              收法）；飞完才走上面的结算。全程 busy 锁点击 */
           var flashEls = [];
           heap.forEach(function(b){ flashEls.push(b.el); });
@@ -2821,13 +2821,13 @@
             flyers.forEach(function(f){
               flyArc(f, {
                 x: cx - f.w / 2, y: cy - f.h / 2, w: f.w, h: f.h,
-                rot: 0, dur: 260, pop: true
+                rot: 0, dur: 470, pop: true
               }, function(){
                 pending--;
                 if(pending <= 0) settleCombine();
               });
             });
-          }, 220);
+          }, 400);
         }
 
         /* 打乱：把堆里剩下的块按当前槽内状态重新生成一局保证
@@ -2923,7 +2923,7 @@
           }
           /* 动画：新摆放（上面刚算好的、按当前槽况保证有解的
              那一局）先不落位——堆里剩下的块先原地整体轻轻浮起、
-             错落晃动约 450ms（.shufflewob 靠 margin 浮起，每块
+             错落晃动约 800ms（.shufflewob 靠 margin 浮起，每块
              一个固定的错开相位与滑行延时），再由 layoutPile(true)
              的过渡平滑滑到新位置落定、压住关系随之刷新。全程
              busy 锁点击，洗牌声沿用翻牌声 */
@@ -2932,8 +2932,8 @@
           var nonce = P.dealNonce;
           var ordered = alive.slice().sort(function(a, b){ return a.id - b.id; });
           ordered.forEach(function(b, i){
-            b.el.style.transitionDelay = ((i * 37) % 120) + "ms";
-            b.el.style.animationDelay = (-((i * 53) % 200)) + "ms";
+            b.el.style.transitionDelay = ((i * 37) % 215) + "ms";
+            b.el.style.animationDelay = (-((i * 53) % 355)) + "ms";
             b.el.classList.add("shufflewob");
           });
           setTimeout(function(){
@@ -2947,8 +2947,8 @@
               });
               if(P.dealNonce !== nonce) return;
               P.busy = false;
-            }, 440);
-          }, 450);
+            }, 520);
+          }, 800);
         }
 
         document.getElementById("toolOut").addEventListener("click", toolOut);
