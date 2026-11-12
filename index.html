@@ -17,10 +17,10 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <!-- 站酷快乐体只用在 .display 标题上，用字是固定的一小批：
          按实际用字取子集，一个分片就够，不再整表分片下载 -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90%E5%9C%B0%E7%8B%B1&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90%E5%9C%B0%E7%8B%B1%E6%8B%BC%E5%9B%BE&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90%E5%9C%B0%E7%8B%B1&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90%E5%9C%B0%E7%8B%B1%E6%8B%BC%E5%9B%BE&display=swap" rel="stylesheet" />
     </noscript>
     <style>
       button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
@@ -676,6 +676,118 @@
         .round-btn{ width:48px; height:48px; min-height:48px; font-size:.78rem; }
       }
 
+      /* ---------- 彩块拼图 ---------- */
+      .pz-wrap{ position:relative; flex:1 1 auto; min-height:0; display:flex; flex-direction:column; }
+      .pz-boardbox{ position:relative; width:min(100%, 54vh); width:min(100%, 54dvh); margin:0 auto; }
+      .pz-board{
+        display:grid; grid-template-columns:repeat(8,1fr); grid-template-rows:repeat(8,1fr);
+        gap:4px; padding:10px; box-sizing:border-box;
+        background:linear-gradient(160deg,#7d6c50,#6b5b43);
+        border-radius:20px; box-shadow:inset 0 3px 14px rgba(40,30,16,.45), 0 4px 14px rgba(74,64,44,.18);
+        aspect-ratio:1; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+      }
+      @media (prefers-color-scheme: dark){ .pz-board{ background:linear-gradient(160deg,#4c4436,#3d372c); } }
+      .pz-cell{
+        position:relative; border-radius:7px; background:#57492f;
+        box-shadow:inset 0 2px 5px rgba(0,0,0,.5), inset 0 -1px 0 rgba(255,255,255,.07);
+      }
+      @media (prefers-color-scheme: dark){ .pz-cell{ background:#2c2822; } }
+      .pz-cell.pv-ok{ background:#5d7d4a; box-shadow:inset 0 0 0 2px #9dc48a, inset 0 2px 5px rgba(0,0,0,.4); }
+      .pz-cell.pv-bad{ background:#8a463c; box-shadow:inset 0 0 0 2px #d68a7d, inset 0 2px 5px rgba(0,0,0,.4); }
+      .pz-cell.pv-line{ box-shadow:inset 0 0 0 2px #e8c96a, inset 0 2px 5px rgba(0,0,0,.4); background:#6d6242; }
+      .pz-cell.pv-line.pv-ok{ background:#6d8a4c; }
+      .pz-block{ position:absolute; inset:0; padding:1px; box-sizing:border-box; }
+      .pz-block .edge{ position:absolute; left:1px; right:1px; top:4px; bottom:-1px; border-radius:7px; z-index:0; }
+      .pz-block .face{
+        position:relative; z-index:1; width:100%; height:100%;
+        border-radius:7px; border:2px solid transparent; box-sizing:border-box; background-clip:padding-box;
+      }
+      .pz-block .face .skin-img, .pz-mini .face .skin-img, .pz-dragcell .face .skin-img{
+        display:block; width:100%; height:100%; object-fit:contain; pointer-events:none; -webkit-user-drag:none;
+      }
+      .pz-board.jelly .pz-block .face, .pz-tray.jelly .pz-mini .face, .pz-drag.jelly .pz-dragcell .face{
+        box-shadow: inset 0 5px 8px rgba(255,255,255,.5), inset 0 -6px 9px rgba(31,26,20,.12);
+      }
+      .pz-board.glassimg .pz-block .face, .pz-board.eggimg .pz-block .face, .pz-board.frogimg .pz-block .face,
+      .pz-tray.glassimg .pz-mini .face, .pz-tray.eggimg .pz-mini .face, .pz-tray.frogimg .pz-mini .face,
+      .pz-drag.glassimg .pz-dragcell .face, .pz-drag.eggimg .pz-dragcell .face, .pz-drag.frogimg .pz-dragcell .face{
+        background:transparent; border-color:transparent; box-shadow:none;
+      }
+      .pz-board.glassimg .pz-block .edge, .pz-tray.glassimg .pz-mini .edge, .pz-drag.glassimg .pz-dragcell .edge{ border-radius:12px; }
+      .pz-board.eggimg .pz-block .edge, .pz-board.frogimg .pz-block .edge,
+      .pz-tray.eggimg .pz-mini .edge, .pz-tray.frogimg .pz-mini .edge,
+      .pz-drag.eggimg .pz-dragcell .edge, .pz-drag.frogimg .pz-dragcell .edge{ display:none; }
+      .pz-board.glassimg .pz-block .face .skin-img, .pz-tray.glassimg .pz-mini .face .skin-img,
+      .pz-drag.glassimg .pz-dragcell .face .skin-img{ transform:scale(1.12); }
+      .pz-block.pop .face{ animation:pzPop .28s ease; }
+      .pz-block.clearing .face{ animation:pzClear .26s ease forwards; }
+      @keyframes pzPop{ 0%{ transform:scale(.6); } 60%{ transform:scale(1.12); } 100%{ transform:scale(1); } }
+      @keyframes pzClear{ 0%{ transform:scale(1); filter:brightness(1.7); } 100%{ transform:scale(.2); filter:brightness(2.2); opacity:0; } }
+      /* Combo 小横幅：只在棋盘上方中央弹一小块，配同位置的
+         小烟花（见 pzFireworks），不再是居中的大药丸 */
+      .pz-combo{
+        position:absolute; left:50%; top:12%; transform:translate(-50%,-50%) scale(.6);
+        z-index:5; pointer-events:none; opacity:0;
+        background:linear-gradient(160deg,#e9b949,#d18f2d); color:#fff;
+        font-size:1.02rem; padding:3px 15px; border-radius:999px;
+        box-shadow:0 6px 16px rgba(120,80,10,.35); text-shadow:0 1px 2px rgba(90,55,0,.4); white-space:nowrap;
+      }
+      .pz-combo.show{ animation:pzCombo .85s ease forwards; }
+      @keyframes pzCombo{
+        0%{ opacity:0; transform:translate(-50%,-50%) scale(.5); }
+        18%{ opacity:1; transform:translate(-50%,-50%) scale(1.18); }
+        34%{ transform:translate(-50%,-50%) scale(.96); }
+        48%{ transform:translate(-50%,-50%) scale(1.05); }
+        72%{ opacity:1; transform:translate(-50%,-58%) scale(1); }
+        100%{ opacity:0; transform:translate(-50%,-70%) scale(1); }
+      }
+      /* 顶部最高 Combo 被刷新时，数字小弹一下 */
+      #pzCombo.bump{ animation:pzBump .45s ease; }
+      @keyframes pzBump{ 0%{ transform:scale(1); } 35%{ transform:scale(1.55); color:#c07f1d; } 100%{ transform:scale(1); } }
+      /* 最高 Combo 这一格：标签字号缩小、禁止换行，
+         「最高 Combo」始终一行，不再被挤成两行 */
+      .stat.pz-stat-combo .k{ font-size:.6rem; letter-spacing:.01em; white-space:nowrap; }
+      .stat.pz-stat-combo .v{ font-size:1rem; white-space:nowrap; }
+      /* Combo 小烟花：固定在触发点的一小簇圆点（约 150px 见方
+         的局部范围），迸开、下落、淡出，绝不铺满全屏 */
+      .pz-fx{ position:fixed; z-index:320; pointer-events:none; }
+      .pz-fx i{ position:absolute; left:0; top:0; border-radius:50%; }
+      .pz-tray{
+        flex:none; margin-top:10px; background:var(--surface-2); border-radius:16px;
+        padding:10px 8px; display:flex; gap:6px; align-items:center; justify-content:space-around;
+        min-height:86px; box-sizing:border-box;
+      }
+      .pz-piece{ position:relative; display:grid; gap:3px; padding:6px; border-radius:12px; cursor:grab; touch-action:none; -webkit-tap-highlight-color:transparent; }
+      .pz-piece.sel{ box-shadow:0 0 0 2px var(--sage-deep); background:var(--surface); }
+      .pz-piece.used{ visibility:hidden; pointer-events:none; }
+      .pz-piece.stuck{ filter:grayscale(.85); opacity:.42; }
+      .pz-piece.dragging{ opacity:.3; }
+      .pz-mini{ position:relative; width:21px; height:21px; }
+      .pz-mini .edge{ position:absolute; left:1px; right:1px; top:4px; bottom:-1px; border-radius:6px; z-index:0; }
+      .pz-mini .face{ position:relative; z-index:1; width:100%; height:100%; border-radius:6px; border:2px solid transparent; box-sizing:border-box; background-clip:padding-box; }
+      .pz-mini.empty{ visibility:hidden; }
+      .pz-drag{ position:fixed; left:0; top:0; z-index:300; display:grid; pointer-events:none; filter:drop-shadow(0 12px 14px rgba(50,38,18,.28)); }
+      .pz-dragcell{ position:relative; }
+      .pz-dragcell .edge{ position:absolute; left:1px; right:1px; top:4px; bottom:-1px; border-radius:7px; z-index:0; }
+      .pz-dragcell .face{ position:relative; z-index:1; width:100%; height:100%; border-radius:7px; border:2px solid transparent; box-sizing:border-box; background-clip:padding-box; }
+      .pz-dragcell.empty{ visibility:hidden; }
+      .pz-over{
+        position:absolute; inset:0; z-index:6; display:none;
+        align-items:center; justify-content:center; padding:16px; box-sizing:border-box;
+      }
+      .pz-over.show{ display:flex; }
+      .pz-over-card{
+        background:var(--surface); border:1.5px solid var(--line); border-radius:20px;
+        padding:20px 26px; text-align:center; box-shadow:0 16px 34px rgba(60,48,26,.35); max-width:82%;
+      }
+      .pz-over-card b{ font-size:1.3rem; display:block; margin-bottom:4px; }
+      .pz-over-card span{ display:block; color:var(--ink-soft); font-size:.92rem; margin-bottom:12px; }
+      .pz-restart{ padding:5px 14px; min-height:2.4rem; font-size:.88rem; align-self:center; flex:none; }
+      @media (prefers-reduced-motion: reduce){
+        .pz-block.pop .face, .pz-block.clearing .face, .pz-combo.show, #pzCombo.bump{ animation:none; }
+        .pz-fx{ display:none; }
+      }
+
       /* ---------- 开始页 ---------- */
       /* 打开先盖住游戏：奶油底 + 淡波点（和游戏同一套底色），
          顶部是扣好的房子 logo 图，中间七个莫兰迪色块围成一圈
@@ -841,6 +953,7 @@
         <button class="sg-btn display" type="button" data-sgame="blocks" aria-pressed="true">彩块归位</button>
         <button class="sg-btn display" type="button" data-sgame="memory" aria-pressed="false">记忆翻牌</button>
         <button class="sg-btn display" type="button" data-sgame="pile" aria-pressed="false">彩块堆消</button>
+        <button class="sg-btn display" type="button" data-sgame="puzzle" aria-pressed="false">彩块拼图</button>
       </div>
       <div class="orbit">
         <div class="orbit-ring" id="orbitRing" aria-hidden="true"></div>
@@ -953,6 +1066,30 @@
             <span id="memDetail"></span>
           </div>
           <button class="btn primary" id="memAgainBtn" type="button">再来一局</button>
+        </div>
+      </section>
+
+      <!-- ============ 彩块拼图 ============ -->
+      <section class="panel" id="panel-puzzle" aria-label="彩块拼图">
+        <div class="hud">
+          <div class="stat"><div class="k">分数</div><div class="v" id="pzScore">0</div></div>
+          <div class="stat"><div class="k">最高分</div><div class="v" id="pzBest">0</div></div>
+          <div class="stat pz-stat-combo"><div class="k">最高 Combo</div><div class="v" id="pzCombo">—</div></div>
+          <button class="btn pz-restart" id="pzRestartBtn" type="button">重新开始</button>
+        </div>
+        <div class="pz-wrap">
+          <div class="pz-boardbox">
+            <div class="pz-board" id="pzBoard" aria-label="拼图棋盘"></div>
+            <div class="pz-combo display" id="pzComboBanner" aria-hidden="true">Combo 2</div>
+            <div class="pz-over" id="pzOver">
+              <div class="pz-over-card">
+                <b class="display">放不下啦</b>
+                <span id="pzOverDetail">本局得分 0</span>
+                <button class="btn primary" id="pzAgainBtn" type="button">再来一局</button>
+              </div>
+            </div>
+          </div>
+          <div class="pz-tray" id="pzTray" aria-label="待放方块"></div>
         </div>
       </section>
     </div>
@@ -1114,7 +1251,7 @@
           document.getElementById("panel-" + name).classList.add("on");
           /* 关卡键打开的是当前玩法的关卡；记忆翻牌没有关卡
              可选项，整颗键藏掉 */
-          document.getElementById("btnLevels").hidden = name === "memory";
+          document.getElementById("btnLevels").hidden = name === "memory" || name === "puzzle";
           renderLevelTray();
           /* 堆消的剩余计数 pill 只在堆消时露面；记忆翻牌第一次
              切过去才建牌（连同当前套的卡面卡背一起按需加载）。
@@ -1124,6 +1261,7 @@
           document.getElementById("pileLeftChip").hidden = name !== "pile";
           pileTools.hidden = !(name === "pile" && !!PILE_LEVELS[P.level].tools);
           if(name === "memory" && !memBuilt) buildMemory();
+          if(name === "puzzle" && !Z.built) initPuzzle();
           if(name === "blocks") requestAnimationFrame(fitBoard);
           if(name === "pile") requestAnimationFrame(function(){
             if(!P.dealt) loadPileLevel(P.level);
@@ -1528,10 +1666,10 @@
         };
         function renderLevelTray(){
           trayLevels.innerHTML = "";
-          if(curGame === "memory"){
+          if(curGame === "memory" || curGame === "puzzle"){
             var note = document.createElement("span");
             note.className = "opt";
-            note.textContent = "记忆翻牌 · 8 对牌自由玩";
+            note.textContent = curGame === "memory" ? "记忆翻牌 · 8 对牌自由玩" : "彩块拼图 · 8×8 自由玩";
             trayLevels.appendChild(note);
             requestAnimationFrame(syncTrayPad);
             return;
@@ -1584,6 +1722,18 @@
             el.classList.toggle("frogimg", key === "frog");
           });
           paintPileFaces();
+          /* 彩块拼图穿同一套装扮：棋盘与托盘容器镜像主题类，
+             已放格子与托盘方块按新皮肤重绘，形状/颜色位/分数不变 */
+          var zBoard = document.getElementById("pzBoard");
+          var zTray = document.getElementById("pzTray");
+          [zBoard, zTray].forEach(function(el){
+            if(!el) return;
+            el.classList.toggle("jelly", !!THEMES[key].jelly);
+            el.classList.toggle("glassimg", key === "glass");
+            el.classList.toggle("eggimg", key === "egg");
+            el.classList.toggle("frogimg", key === "frog");
+          });
+          paintPuzzleFaces();
           /* the memory cards follow the same 装扮： swap their images
              in place — flipped/matched state, moves and timer are
              left exactly as they are */
@@ -2963,6 +3113,688 @@
         window.addEventListener("resize", function(){ layoutPile(false); });
         window.addEventListener("orientationchange", function(){ setTimeout(function(){ layoutPile(false); }, 60); });
 
+        /* ================= 彩块拼图 =================
+           8×8 木块拼图：托盘一次 3 个多格方块，拖动（或点选后点
+           棋盘）放置，填满整行/整列消除。计分：放下每格 +1；
+           消除每条线 10 分，多线同消 ×线数，Combo 再乘（连续
+           每次放置都消除则 Combo 递增，没消除归零）。顶部 Combo
+           显示的是本局最高连续连击（断了不回落，超过才刷新，
+           刷新时数字弹一下、旁放一簇小烟花）。发牌向棋盘空缺
+           倾斜（见 pzDealOne / pzDealShapes）：有能一放消行的
+           补缺形状就必发它，没有就发能把某行/列喂到只差一格
+           的做线形状，再没有才按权重抽（小块权重高、大块稀
+           有），一组至少 2 个当前放得下。一组三块自发出起
+           固定不变：放掉一个，剩下两个形状、颜色原样保留，
+           消行也不换，三个全部放完才发新组（新组仍按当时
+           棋盘贴缺口发）。方块颜色取当
+           前装扮 8 个普通色之一（不用彩虹位），渲染走
+           paintPileTile 与堆消同一套（脸 + 立体边，奶蛙无边） */
+        var pzBoard = document.getElementById("pzBoard");
+        var pzTray = document.getElementById("pzTray");
+        var pzOver = document.getElementById("pzOver");
+        /* 形状池：[格子 [r,c] 列表, 权重]。整体再往小块倾斜：
+           1 格、2 格、3 格条与小拐角权重最高，2×2 与 T 形次之，
+           4 格条只剩 2，大块（5 格条、2×3、十字、3×3）全部压到
+           权重 1、只偶尔出现——小块填缺口快、成线快，连击才
+           续得起来（发牌策略见 pzDealOne） */
+        var PZ_SHAPES = [
+          [[[0,0]], 12],
+          [[[0,0],[0,1]], 10], [[[0,0],[1,0]], 10],
+          [[[0,0],[0,1],[0,2]], 8], [[[0,0],[1,0],[2,0]], 8],
+          [[[0,0],[0,1],[0,2],[0,3]], 2], [[[0,0],[1,0],[2,0],[3,0]], 2],
+          [[[0,0],[0,1],[0,2],[0,3],[0,4]], 1], [[[0,0],[1,0],[2,0],[3,0],[4,0]], 1],
+          [[[0,0],[0,1],[1,0],[1,1]], 8],
+          [[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]], 1],
+          [[[0,0],[1,0],[0,1],[1,1],[0,2],[1,2]], 1],
+          [[[0,0],[1,0],[1,1]], 8], [[[0,0],[0,1],[1,1]], 8],
+          [[[0,1],[1,0],[1,1]], 8], [[[0,0],[1,0],[0,1]], 8],
+          [[[0,0],[1,0],[2,0],[2,1]], 3], [[[0,0],[0,1],[0,2],[1,0]], 3],
+          [[[0,0],[1,0],[2,0],[0,1]], 3], [[[0,2],[1,2],[2,0],[2,1],[2,2]], 1],
+          [[[0,0],[0,1],[0,2],[1,1]], 5], [[[0,1],[1,0],[1,1],[1,2]], 5],
+          [[[0,0],[1,0],[1,1],[2,0]], 5], [[[0,1],[1,0],[1,1],[2,1]], 5],
+          [[[0,1],[0,2],[1,0],[1,1]], 3], [[[0,0],[0,1],[1,1],[1,2]], 3],
+          [[[0,0],[1,0],[1,1],[2,1]], 2], [[[0,1],[1,1],[1,0],[2,0]], 2],
+          [[[0,1],[1,0],[1,1],[1,2],[2,1]], 1],
+          [[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]], 1]
+        ];
+        var PZ_WSUM = PZ_SHAPES.reduce(function(s, x){ return s + x[1]; }, 0);
+        function pzPickShape(){
+          var r = Math.random() * PZ_WSUM;
+          for(var i = 0; i < PZ_SHAPES.length; i++){
+            r -= PZ_SHAPES[i][1];
+            if(r <= 0) return PZ_SHAPES[i][0];
+          }
+          return PZ_SHAPES[9][0];
+        }
+        function pzShapeDims(cells){
+          var mr = 0, mc = 0;
+          cells.forEach(function(p){ if(p[0] > mr) mr = p[0]; if(p[1] > mc) mc = p[1]; });
+          return { rows: mr + 1, cols: mc + 1 };
+        }
+        var Z = {
+          built:false, grid:[], score:0, best:0, combo:0, maxCombo:0,
+          pieces:[], selected:-1, over:false, busy:false
+        };
+        var pzHudMax = 0;   /* 顶部已显示的最高 Combo，刷新时才弹 */
+        try{ Z.best = parseInt(localStorage.getItem("caikuai-puzzle-best") || "0", 10) || 0; }catch(e){ Z.best = 0; }
+        function pzSaveBest(){
+          if(Z.score > Z.best){
+            Z.best = Z.score;
+            try{ localStorage.setItem("caikuai-puzzle-best", String(Z.best)); }catch(e){}
+          }
+        }
+        function pzCanPlace(cells, tr, tc){
+          for(var i = 0; i < cells.length; i++){
+            var r = tr + cells[i][0], c = tc + cells[i][1];
+            if(r < 0 || r > 7 || c < 0 || c > 7) return false;
+            if(Z.grid[r * 8 + c] !== null) return false;
+          }
+          return true;
+        }
+        function pzCanAnywhere(cells){
+          var d = pzShapeDims(cells);
+          for(var r = 0; r <= 8 - d.rows; r++)
+            for(var c = 0; c <= 8 - d.cols; c++)
+              if(pzCanPlace(cells, r, c)) return true;
+          return false;
+        }
+        function pzMakeBlock(color, cls){
+          var b = document.createElement("div");
+          b.className = cls;
+          var edge = document.createElement("div"); edge.className = "edge";
+          var face = document.createElement("div"); face.className = "face";
+          b.appendChild(edge); b.appendChild(face);
+          paintPileTile(b, { color: color });
+          return b;
+        }
+        function pzUpdateHUD(){
+          document.getElementById("pzScore").textContent = Z.score;
+          document.getElementById("pzBest").textContent = Z.best;
+          /* 顶部显示本局最高连续 Combo：连击断了不回落 */
+          var cEl = document.getElementById("pzCombo");
+          cEl.textContent = Z.maxCombo > 0 ? "×" + Z.maxCombo : "—";
+          if(Z.maxCombo > pzHudMax){
+            pzHudMax = Z.maxCombo;
+            cEl.classList.remove("bump");
+            void cEl.offsetWidth;
+            cEl.classList.add("bump");
+            /* 最高纪录刷新时，数字旁再放一簇更小的烟花 */
+            if(Z.maxCombo >= 2) pzHudFireworks();
+          }
+        }
+        function pzRenderTray(){
+          pzTray.innerHTML = "";
+          Z.pieces.forEach(function(p, idx){
+            var el = document.createElement("div");
+            el.className = "pz-piece" + (p.used ? " used" : "") + (idx === Z.selected ? " sel" : "");
+            el.setAttribute("role", "button");
+            el.setAttribute("aria-label", "待放方块 " + (idx + 1));
+            var d = pzShapeDims(p.cells);
+            el.style.gridTemplateColumns = "repeat(" + d.cols + ", 21px)";
+            var filled = {};
+            p.cells.forEach(function(cc){ filled[cc[0] + "," + cc[1]] = true; });
+            for(var r = 0; r < d.rows; r++){
+              for(var c = 0; c < d.cols; c++){
+                if(filled[r + "," + c]) el.appendChild(pzMakeBlock(p.color, "pz-mini"));
+                else { var sp = document.createElement("div"); sp.className = "pz-mini empty"; el.appendChild(sp); }
+              }
+            }
+            (function(i, node){
+              node.addEventListener("pointerdown", function(e){ pzPointerDown(e, i, node); });
+            })(idx, el);
+            p.el = el;
+            pzTray.appendChild(el);
+          });
+          pzRefreshStuck();
+        }
+        function pzRefreshStuck(){
+          Z.pieces.forEach(function(p){
+            if(!p.el) return;
+            p.el.classList.toggle("stuck", !p.used && !pzCanAnywhere(p.cells));
+          });
+        }
+        /* 补缺形状：池中「现在放下去就能消至少一行/列」的形状
+           （去重）。某行/列只差几格时，能正好补上缺口的直条、
+           小块自然会命中这个集合 */
+        function pzClearerShapes(){
+          var out = [], seen = {};
+          PZ_SHAPES.forEach(function(entry){
+            var cells = entry[0];
+            var key = JSON.stringify(cells);
+            if(seen[key]) return;
+            var d = pzShapeDims(cells);
+            for(var r = 0; r <= 8 - d.rows && !seen[key]; r++){
+              for(var c = 0; c <= 8 - d.cols; c++){
+                if(!pzCanPlace(cells, r, c)) continue;
+                var extra = [];
+                cells.forEach(function(p){ extra.push((r + p[0]) * 8 + (c + p[1])); });
+                var lines = pzFullLines(extra);
+                if(lines.rows.length + lines.cols.length > 0){
+                  seen[key] = true;
+                  out.push(cells);
+                  break;
+                }
+              }
+            }
+          });
+          return out;
+        }
+        /* 做线形状：池中「放下去能让某一行/列恰好只剩 1 格
+           空缺」的形状（去重）。没有补缺块时发它，把线先喂到
+           差一格，下一块就容易消 */
+        function pzSetupShapes(){
+          var out = [], seen = {};
+          PZ_SHAPES.forEach(function(entry){
+            var cells = entry[0];
+            var key = JSON.stringify(cells);
+            if(seen[key]) return;
+            var d = pzShapeDims(cells);
+            for(var r = 0; r <= 8 - d.rows && !seen[key]; r++){
+              for(var c = 0; c <= 8 - d.cols; c++){
+                if(!pzCanPlace(cells, r, c)) continue;
+                var g = Z.grid.slice();
+                cells.forEach(function(p){ g[(r + p[0]) * 8 + (c + p[1])] = 0; });
+                var hit = false;
+                for(var rr = 0; rr < 8 && !hit; rr++){
+                  var n = 0;
+                  for(var cc = 0; cc < 8; cc++) if(g[rr * 8 + cc] !== null) n++;
+                  if(n === 7) hit = true;
+                }
+                for(var cc2 = 0; cc2 < 8 && !hit; cc2++){
+                  var n2 = 0;
+                  for(var rr2 = 0; rr2 < 8; rr2++) if(g[rr2 * 8 + cc2] !== null) n2++;
+                  if(n2 === 7) hit = true;
+                }
+                if(hit){ seen[key] = true; out.push(cells); }
+              }
+            }
+          });
+          return out;
+        }
+        /* 发一块（按当前棋盘）：有补缺形状就必发补缺形状；
+           没有就发做线形状；再没有才按权重抽且必须当前放得
+           下（抽 30 次还没有才作罢） */
+        function pzDealOne(){
+          var clearers = pzClearerShapes();
+          if(clearers.length) return clearers[Math.floor(Math.random() * clearers.length)];
+          var setups = pzSetupShapes();
+          if(setups.length) return setups[Math.floor(Math.random() * setups.length)];
+          for(var t = 0; t < 30; t++){
+            var cand = pzPickShape();
+            if(pzCanAnywhere(cand)) return cand;
+          }
+          return pzPickShape();
+        }
+        /* 发牌向空缺倾斜：一组三块逐块按 pzDealOne 发；最后
+           兜底保证一组至少 2 个能放——池中实在无可放形状时
+           才发死牌，此时棋盘也接近终局 */
+        function pzDealShapes(){
+          var picked = [];
+          for(var i = 0; i < 3; i++) picked.push(pzDealOne());
+          function placeableCount(){
+            var n = 0;
+            picked.forEach(function(cs){ if(cs && pzCanAnywhere(cs)) n++; });
+            return n;
+          }
+          var guard = 0;
+          while(placeableCount() < 2 && guard < 3){
+            guard++;
+            var swap = null;
+            for(var s = 0; s < PZ_SHAPES.length && !swap; s++){
+              var cand2 = PZ_SHAPES[Math.floor(Math.random() * PZ_SHAPES.length)][0];
+              if(pzCanAnywhere(cand2)) swap = cand2;
+            }
+            if(!swap) break;
+            for(var j = 0; j < 3; j++){
+              if(!picked[j] || !pzCanAnywhere(picked[j])){ picked[j] = swap; break; }
+            }
+          }
+          return picked;
+        }
+        function pzDeal(){
+          var shapes = pzDealShapes();
+          Z.pieces = [];
+          for(var i = 0; i < 3; i++){
+            Z.pieces.push({ cells: shapes[i], color: Math.floor(Math.random() * 8), used: false, el: null });
+          }
+          Z.selected = -1;
+          pzRenderTray();
+        }
+        function initPuzzle(){
+          Z.built = true;
+          Z.grid = [];
+          for(var i = 0; i < 64; i++) Z.grid.push(null);
+          Z.score = 0; Z.combo = 0; Z.maxCombo = 0; pzHudMax = 0; Z.over = false; Z.busy = false; Z.selected = -1;
+          document.getElementById("pzCombo").classList.remove("bump");
+          pzBoard.innerHTML = "";
+          for(var k = 0; k < 64; k++){
+            var cell = document.createElement("div");
+            cell.className = "pz-cell";
+            cell.setAttribute("data-idx", k);
+            pzBoard.appendChild(cell);
+          }
+          pzOver.classList.remove("show");
+          pzDeal();
+          pzUpdateHUD();
+        }
+        /* 装扮重绘：棋盘已放格子与托盘方块按当前皮肤重画，
+           形状、颜色位、分数、进度都不动（applyTheme 调用） */
+        function paintPuzzleFaces(){
+          if(!Z.built) return;
+          for(var i = 0; i < 64; i++){
+            if(Z.grid[i] === null) continue;
+            var cell = pzBoard.children[i];
+            var blk = cell && cell.querySelector(".pz-block");
+            if(blk) paintPileTile(blk, { color: Z.grid[i] });
+          }
+          Z.pieces.forEach(function(p){
+            if(!p.el) return;
+            var minis = p.el.querySelectorAll(".pz-mini:not(.empty)");
+            var filled = p.cells;
+            minis.forEach(function(m, mi){
+              if(filled[mi]) paintPileTile(m, { color: p.color });
+            });
+          });
+        }
+        function pzFullLines(extra){
+          var g = Z.grid.slice();
+          if(extra) extra.forEach(function(idx){ g[idx] = 0; });
+          var rows = [], cols = [];
+          for(var r = 0; r < 8; r++){
+            var full = true;
+            for(var c = 0; c < 8; c++) if(g[r * 8 + c] === null){ full = false; break; }
+            if(full) rows.push(r);
+          }
+          for(var c2 = 0; c2 < 8; c2++){
+            var full2 = true;
+            for(var r2 = 0; r2 < 8; r2++) if(g[r2 * 8 + c2] === null){ full2 = false; break; }
+            if(full2) cols.push(c2);
+          }
+          return { rows: rows, cols: cols };
+        }
+        function pzClearPreview(){
+          pzBoard.querySelectorAll(".pz-cell").forEach(function(cell){
+            cell.classList.remove("pv-ok", "pv-bad", "pv-line");
+          });
+        }
+        function pzShowPreview(piece, tr, tc){
+          pzClearPreview();
+          if(!piece) return;
+          var can = pzCanPlace(piece.cells, tr, tc);
+          var idxs = [];
+          piece.cells.forEach(function(p){
+            var r = tr + p[0], c = tc + p[1];
+            if(r < 0 || r > 7 || c < 0 || c > 7) return;
+            idxs.push(r * 8 + c);
+            pzBoard.children[r * 8 + c].classList.add(can ? "pv-ok" : "pv-bad");
+          });
+          if(can){
+            var lines = pzFullLines(idxs);
+            lines.rows.forEach(function(r){ for(var c = 0; c < 8; c++) pzBoard.children[r * 8 + c].classList.add("pv-line"); });
+            lines.cols.forEach(function(c){ for(var r = 0; r < 8; r++) pzBoard.children[r * 8 + c].classList.add("pv-line"); });
+          }
+        }
+        function pzShowBanner(n){
+          var b = document.getElementById("pzComboBanner");
+          b.textContent = "Combo " + n;
+          b.classList.remove("show");
+          void b.offsetWidth;
+          b.classList.add("show");
+        }
+        /* Combo 小烟花：在 (cx, cy) 放一小簇圆点，向外迸开、
+           顺势下落、淡出，范围就局部一小块；纯 JS 粒子 + WAAPI，
+           不占全屏、不加图片。spread 是迸开半径（像素） */
+        var PZ_FX_COLORS = ["#e9b949", "#d77a8c", "#7fae7a", "#7d9fc4", "#c9a86a", "#b39ddb"];
+        function pzFireworks(cx, cy, count, spread){
+          if(reduced) return;
+          var box = document.createElement("div");
+          box.className = "pz-fx";
+          box.style.left = cx + "px"; box.style.top = cy + "px";
+          document.body.appendChild(box);
+          var maxDur = 0;
+          for(var i = 0; i < count; i++){
+            var dot = document.createElement("i");
+            var size = 4 + Math.random() * 4;
+            dot.style.width = size + "px"; dot.style.height = size + "px";
+            dot.style.marginLeft = (-size / 2) + "px";
+            dot.style.marginTop = (-size / 2) + "px";
+            dot.style.background = PZ_FX_COLORS[i % PZ_FX_COLORS.length];
+            box.appendChild(dot);
+            var ang = Math.random() * Math.PI * 2;
+            var dist = spread * (0.35 + Math.random() * 0.75);
+            var dx = Math.cos(ang) * dist;
+            var dy = Math.sin(ang) * dist * 0.8 + dist * 0.55;
+            var dur = 600 + Math.random() * 320;
+            if(dur > maxDur) maxDur = dur;
+            dot.animate([
+              { transform: "translate(0,0) scale(1)", opacity: 1 },
+              { transform: "translate(" + dx + "px," + dy + "px) scale(.35)", opacity: 0 }
+            ], { duration: dur, easing: "cubic-bezier(.17,.67,.35,1)" });
+          }
+          setTimeout(function(){ box.remove(); }, maxDur + 80);
+        }
+        /* 棋盘上方中央的一簇（和 Combo 小横幅同一个位置） */
+        function pzBoardFireworks(big){
+          var r = pzBoard.getBoundingClientRect();
+          pzFireworks(r.left + r.width / 2, r.top + r.height * 0.13, big ? 16 : 12, big ? 72 : 56);
+        }
+        /* 顶部最高 Combo 数字旁的一簇更小的 */
+        function pzHudFireworks(){
+          var r = document.getElementById("pzCombo").getBoundingClientRect();
+          pzFireworks(r.left + r.width / 2, r.top + r.height / 2, 8, 32);
+        }
+        function pzPostMove(){
+          pzSaveBest();
+          pzUpdateHUD();
+          if(Z.pieces.every(function(p){ return p.used; })){
+            pzDeal();
+          } else {
+            /* 一组三块自发出起固定：放掉一个，剩下两个形状、
+               颜色原样保留，刚消过行也不换，只刷新放不下
+               时变灰的状态；三个全放完才由上面发新组 */
+            pzRefreshStuck();
+          }
+          var anyLeft = Z.pieces.some(function(p){ return !p.used; });
+          if(anyLeft && Z.pieces.every(function(p){ return p.used || !pzCanAnywhere(p.cells); })){
+            Z.over = true;
+            pzSaveBest(); pzUpdateHUD();
+            document.getElementById("pzOverDetail").textContent =
+              "本局得分 " + Z.score + " · 最高分 " + Z.best;
+            pzOver.classList.add("show");
+            sndLose();
+          }
+        }
+        function pzPlace(idx, tr, tc){
+          var piece = Z.pieces[idx];
+          if(!piece || piece.used || Z.over || Z.busy) return false;
+          if(!pzCanPlace(piece.cells, tr, tc)) return false;
+          piece.used = true;
+          if(Z.selected === idx) Z.selected = -1;
+          piece.cells.forEach(function(p){
+            var gi = (tr + p[0]) * 8 + (tc + p[1]);
+            Z.grid[gi] = piece.color;
+            var blk = pzMakeBlock(piece.color, "pz-block pop");
+            pzBoard.children[gi].appendChild(blk);
+          });
+          Z.score += piece.cells.length;
+          sndInsert();
+          if(piece.el) piece.el.classList.add("used");
+          var lines = pzFullLines(null);
+          var n = lines.rows.length + lines.cols.length;
+          if(n > 0){
+            Z.combo++;
+            if(Z.combo > Z.maxCombo) Z.maxCombo = Z.combo;
+            Z.score += 10 * n * n * Z.combo;
+            if(Z.combo >= 2 || n >= 2){ pzShowBanner(Z.combo); pzBoardFireworks(true); }
+            else pzBoardFireworks(false);
+            sndPair();
+            var clearIdx = {};
+            lines.rows.forEach(function(r){ for(var c = 0; c < 8; c++) clearIdx[r * 8 + c] = true; });
+            lines.cols.forEach(function(c){ for(var r = 0; r < 8; r++) clearIdx[r * 8 + c] = true; });
+            Object.keys(clearIdx).forEach(function(k){
+              var blk2 = pzBoard.children[k].querySelector(".pz-block");
+              if(blk2) blk2.classList.add("clearing");
+            });
+            Z.busy = true;
+            pzUpdateHUD();
+            setTimeout(function(){
+              Object.keys(clearIdx).forEach(function(k){
+                Z.grid[k] = null;
+                pzBoard.children[k].innerHTML = "";
+              });
+              Z.busy = false;
+              pzPostMove();
+            }, reduced ? 0 : 270);
+          } else {
+            Z.combo = 0;
+            pzPostMove();
+          }
+          pzUpdateHUD();
+          return true;
+        }
+        /* ---- 拖动 & 点选 ---- */
+        var pzDrag = null;
+        function pzBoardCellFromPoint(x, y){
+          var r = pzBoard.getBoundingClientRect();
+          var pad = 10, gap = 4;
+          var inner = r.width - pad * 2;
+          var cell = (inner + gap) / 8;
+          var cx = x - r.left - pad, cy = y - r.top - pad;
+          if(cx < 0 || cy < 0) return null;
+          var col = Math.floor(cx / cell), row = Math.floor(cy / cell);
+          if(row < 0 || row > 7 || col < 0 || col > 7) return null;
+          /* cellPx 必须是格子的真实边长：内宽扣掉 7 条 4px 间隔
+             再除以 8。拖动克隆按这个尺寸画，投影的每一格才能
+             和棋盘格严丝合缝对齐（写成 inner/8 会每格虚大
+             3.5px，克隆越往右下偏离棋盘格越多） */
+          return { row: row, col: col, cellPx: (inner - gap * 7) / 8 };
+        }
+        function pzMakeDragClone(piece, cellPx){
+          var d = pzShapeDims(piece.cells);
+          var el = document.createElement("div");
+          el.className = "pz-drag" + (pzBoard.classList.contains("jelly") ? " jelly" : "") +
+            (pzBoard.classList.contains("glassimg") ? " glassimg" : "") +
+            (pzBoard.classList.contains("eggimg") ? " eggimg" : "") +
+            (pzBoard.classList.contains("frogimg") ? " frogimg" : "");
+          el.style.gridTemplateColumns = "repeat(" + d.cols + ", " + cellPx + "px)";
+          el.style.gap = "4px";
+          var filled = {};
+          piece.cells.forEach(function(cc){ filled[cc[0] + "," + cc[1]] = true; });
+          for(var r = 0; r < d.rows; r++){
+            for(var c = 0; c < d.cols; c++){
+              if(filled[r + "," + c]){
+                var cellEl = pzMakeBlock(piece.color, "pz-dragcell");
+                cellEl.style.width = cellPx + "px"; cellEl.style.height = cellPx + "px";
+                el.appendChild(cellEl);
+              } else {
+                var sp = document.createElement("div");
+                sp.className = "pz-dragcell empty";
+                sp.style.width = cellPx + "px"; sp.style.height = cellPx + "px";
+                el.appendChild(sp);
+              }
+            }
+          }
+          document.body.appendChild(el);
+          return el;
+        }
+        function pzPointerDown(e, idx, node){
+          if(Z.over || Z.busy) return;
+          var piece = Z.pieces[idx];
+          if(!piece || piece.used) return;
+          e.preventDefault();
+          ac();
+          var rect = node.getBoundingClientRect();
+          var d = pzShapeDims(piece.cells);
+          var grabCol = Math.min(d.cols - 1, Math.max(0, Math.floor((e.clientX - rect.left) / (rect.width / d.cols))));
+          var grabRow = Math.min(d.rows - 1, Math.max(0, Math.floor((e.clientY - rect.top) / (rect.height / d.rows))));
+          pzDrag = {
+            idx: idx, startX: e.clientX, startY: e.clientY,
+            grabRow: grabRow, grabCol: grabCol,
+            active: false, clone: null, target: null, can: false
+          };
+          window.addEventListener("pointermove", pzPointerMove);
+          window.addEventListener("pointerup", pzPointerUp, { once: true });
+          window.addEventListener("pointercancel", pzPointerCancel, { once: true });
+        }
+        /* 拖动时棋盘上的投影比方块本体偏左上一点点（约 0.18
+           格，不超过半格）：瞄准点 = 手指位置往左上偏 PZ_OFF
+           格再换算格子，投影画在瞄准点算出的格子上；克隆本体
+           贴到目标格后还要往右下回偏 PZ_OFF 格，于是投影始终
+           在本体左上约 0.18 格处、手指不遮挡投影。落点以投影
+           为准：松手按同一瞄准公式算出的格子落子 */
+        var PZ_OFF = 0.18;
+        function pzAimTarget(piece, grabRow, grabCol, x, y, cellPx){
+          var pitch = cellPx + 4;
+          var bc = pzBoardCellFromPoint(x - PZ_OFF * pitch, y - PZ_OFF * pitch);
+          if(!bc) return null;
+          return { r: bc.row - grabRow, c: bc.col - grabCol };
+        }
+        /* 投影吸附（温和辅助，只改投影显示的格子）：把瞄准点
+           换算成小数锚点后，若它离某个合法落点（放得下、不压
+           已有块的空位）不超过约 0.3 格，投影轻轻落到最近的
+           那个合法落点上，方块容易落进空位里；若离能消行/消
+           列、凑成 Combo 的落点不超过约 0.45 格，优先吸到那
+           个落点。范围特意收得很小：只有瞄准点真的贴近那个
+           落点才吸，稍远一点就完全不吸，不把块往旁边拽。
+           红线：吸附只在上述小范围内发生——拖离范围立刻失效、
+           回到按瞄准点取整的原始落点，原始落点非法就照旧红显、
+           不偷偷换地方；投影在哪松手就落哪（pzAimResolve 是
+           预览与松手落点共用的唯一解析）。点选放置不走这里 */
+        var PZ_SNAP = 0.3, PZ_SNAP_LINE = 0.45;
+        function pzSnapTarget(piece, grabRow, grabCol, x, y, cellPx){
+          var pitch = cellPx + 4;
+          var br = pzBoard.getBoundingClientRect();
+          var fr = (y - PZ_OFF * pitch - br.top - 10) / pitch - grabRow;
+          var fc = (x - PZ_OFF * pitch - br.left - 10) / pitch - grabCol;
+          var r0 = Math.floor(fr), c0 = Math.floor(fc);
+          var best = null, bestD2 = PZ_SNAP * PZ_SNAP;
+          var bestLine = null, bestLineD2 = PZ_SNAP_LINE * PZ_SNAP_LINE;
+          for(var r = r0 - 1; r <= r0 + 1; r++){
+            for(var c = c0 - 1; c <= c0 + 1; c++){
+              if(!pzCanPlace(piece.cells, r, c)) continue;
+              var dr = r - fr, dc = c - fc;
+              var d2 = dr * dr + dc * dc;
+              var idxs = [];
+              piece.cells.forEach(function(p){ idxs.push((r + p[0]) * 8 + (c + p[1])); });
+              var lines = pzFullLines(idxs);
+              if(lines.rows.length + lines.cols.length > 0){
+                if(d2 <= bestLineD2){ bestLine = { r: r, c: c }; bestLineD2 = d2; }
+              } else if(d2 <= bestD2){
+                best = { r: r, c: c }; bestD2 = d2;
+              }
+            }
+          }
+          return bestLine || best;
+        }
+        function pzAimResolve(piece, grabRow, grabCol, x, y, cellPx){
+          var raw = pzAimTarget(piece, grabRow, grabCol, x, y, cellPx);
+          if(!raw) return null;
+          return pzSnapTarget(piece, grabRow, grabCol, x, y, cellPx) || raw;
+        }
+        /* 克隆跟随缓动：本体不瞬间贴死手指，每帧只朝目标位置
+           追 0.25（比最初的 0.35 仍慢一截，但比 0.18 轻快，
+           不发沉），动作顺而不拖。拖动中本体还带 1.03 倍的
+           轻微放大 + 柔和投影，看着像浮起来一样轻。纯视觉：
+           投影与松手落点都按手指的实时坐标算，不受它影响 */
+        function pzDragStep(){
+          if(!pzDrag || !pzDrag.clone) return;
+          var k = reduced ? 1 : 0.25;
+          var dx = pzDrag.goalX - pzDrag.visX, dy = pzDrag.goalY - pzDrag.visY;
+          if(Math.abs(dx) < 0.4 && Math.abs(dy) < 0.4){
+            pzDrag.visX = pzDrag.goalX; pzDrag.visY = pzDrag.goalY;
+          } else {
+            pzDrag.visX += dx * k;
+            pzDrag.visY += dy * k;
+          }
+          pzDrag.clone.style.transform = "translate(" + pzDrag.visX + "px," + pzDrag.visY + "px) scale(1.03)";
+          pzDrag.raf = requestAnimationFrame(pzDragStep);
+        }
+        function pzPointerMove(e){
+          if(!pzDrag) return;
+          var piece = Z.pieces[pzDrag.idx];
+          if(!pzDrag.active){
+            if(Math.hypot(e.clientX - pzDrag.startX, e.clientY - pzDrag.startY) < 7) return;
+            pzDrag.active = true;
+            var bc = pzBoardCellFromPoint(e.clientX, e.clientY);
+            var cellPx = bc ? bc.cellPx : ((pzBoard.clientWidth - 20) - 28) / 8;
+            pzDrag.clone = pzMakeDragClone(piece, cellPx);
+            pzDrag.cellPx = cellPx;
+            /* 本体从手指当前位置起步（被抓的那格对准手指），
+               之后由 pzDragStep 缓动追赶目标位置 */
+            pzDrag.visX = pzDrag.goalX = e.clientX - (pzDrag.grabCol * (cellPx + 4) + cellPx / 2);
+            pzDrag.visY = pzDrag.goalY = e.clientY - (pzDrag.grabRow * (cellPx + 4) + cellPx / 2);
+            pzDrag.clone.style.transform = "translate(" + pzDrag.visX + "px," + pzDrag.visY + "px) scale(1.03)";
+            pzDrag.raf = requestAnimationFrame(pzDragStep);
+            if(piece.el) piece.el.classList.add("dragging");
+            if(Z.selected !== -1){ Z.selected = -1; pzRenderTraySel(); }
+          }
+          var pitch = pzDrag.cellPx + 4;
+          var t = pzAimResolve(piece, pzDrag.grabRow, pzDrag.grabCol, e.clientX, e.clientY, pzDrag.cellPx);
+          pzDrag.target = t;
+          pzDrag.can = t ? pzCanPlace(piece.cells, t.r, t.c) : false;
+          if(t){
+            /* 本体的目标位置 = 目标格再往右下回偏 PZ_OFF 格，
+               于是投影（目标格的高亮）在本体的左上一点点；
+               本体由缓动追到这个位置，不瞬间跳过去 */
+            var br = pzBoard.getBoundingClientRect();
+            pzDrag.goalX = br.left + 10 + (t.c + PZ_OFF) * pitch;
+            pzDrag.goalY = br.top + 10 + (t.r + PZ_OFF) * pitch;
+            pzShowPreview(piece, t.r, t.c);
+          } else {
+            /* 瞄准点不在棋盘上：本体缓动跟住手指（被抓的那格
+               对准手指），不画投影 */
+            pzDrag.goalX = e.clientX - (pzDrag.grabCol * pitch + pzDrag.cellPx / 2);
+            pzDrag.goalY = e.clientY - (pzDrag.grabRow * pitch + pzDrag.cellPx / 2);
+            pzShowPreview(null);
+          }
+        }
+        function pzRenderTraySel(){
+          Z.pieces.forEach(function(p, i){
+            if(p.el) p.el.classList.toggle("sel", i === Z.selected);
+          });
+        }
+        function pzDragCleanup(d){
+          if(d.raf) cancelAnimationFrame(d.raf);
+          if(d.clone) d.clone.remove();
+          var piece = Z.pieces[d.idx];
+          if(piece && piece.el) piece.el.classList.remove("dragging");
+          pzClearPreview();
+        }
+        function pzPointerUp(e){
+          window.removeEventListener("pointermove", pzPointerMove);
+          window.removeEventListener("pointercancel", pzPointerCancel);
+          if(!pzDrag) return;
+          var d = pzDrag;
+          pzDrag = null;
+          var piece = Z.pieces[d.idx];
+          if(d.active){
+            pzDragCleanup(d);
+            /* 落点不用最后一次 pointermove 的旧目标：按松手
+               瞬间的坐标、用和投影完全相同的瞄准解析（含同一
+               套吸附）重算——投影最后停在哪，松手就落在哪 */
+            var cellPx = d.cellPx || ((pzBoard.clientWidth - 20) - 28) / 8;
+            var t = (e && typeof e.clientX === "number")
+              ? pzAimResolve(piece, d.grabRow, d.grabCol, e.clientX, e.clientY, cellPx)
+              : d.target;
+            if(t && pzCanPlace(piece.cells, t.r, t.c)){
+              pzPlace(d.idx, t.r, t.c);
+            } else {
+              sndBlocked();
+            }
+          } else {
+            /* 点选：再点一下取消，点别的换选 */
+            Z.selected = (Z.selected === d.idx) ? -1 : d.idx;
+            pzRenderTraySel();
+            sndSelect();
+          }
+        }
+        /* 拖动被系统手势/来电等打断（pointercancel）时只收拾
+           克隆与投影，不落子，也别把克隆留在屏幕上 */
+        function pzPointerCancel(){
+          window.removeEventListener("pointermove", pzPointerMove);
+          window.removeEventListener("pointerup", pzPointerUp);
+          if(!pzDrag) return;
+          var d = pzDrag;
+          pzDrag = null;
+          if(d.active) pzDragCleanup(d);
+        }
+        /* 点选模式下点棋盘：以点中格为方块外接矩形左上角放置 */
+        pzBoard.addEventListener("pointerdown", function(e){
+          if(Z.selected < 0 || Z.over || Z.busy) return;
+          var bc = pzBoardCellFromPoint(e.clientX, e.clientY);
+          if(!bc) return;
+          var idx = Z.selected;
+          if(pzPlace(idx, bc.row, bc.col)){
+            Z.selected = -1;
+            pzRenderTraySel();
+          } else {
+            sndBlocked();
+          }
+        });
+        pzBoard.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+        document.getElementById("pzRestartBtn").addEventListener("click", function(){ initPuzzle(); sndSelect(); });
+        document.getElementById("pzAgainBtn").addEventListener("click", function(){ initPuzzle(); sndSelect(); });
+
         /* ================= memory game ================= */
         var memGrid = document.getElementById("memGrid");
         var M = { open:[], matched:0, moves:0, seconds:0, timer:null, started:false, lock:false, done:false };
@@ -3185,6 +4017,7 @@
           if(name === "blocks") loadLevel(G.level);
           else if(name === "pile") loadPileLevel(P.level);
           else if(name === "memory") buildMemory();
+          else if(name === "puzzle") initPuzzle();
         }
 
         /* 点「开始游戏」：先切到开始页选中的玩法，音乐起播
