@@ -17,10 +17,10 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <!-- 站酷快乐体只用在 .display 标题上，用字是固定的一小批：
          按实际用字取子集，一个分片就够，不再整表分片下载 -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90%E5%9C%B0%E7%8B%B1&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&text=%E8%A3%85%E6%89%AE%E5%85%B3%E5%8D%A1%E7%8E%A9%E6%B3%95%E5%BD%A9%E5%9D%97%E5%BD%92%E4%BD%8D%E5%A0%86%E6%B6%88%E8%AE%B0%E5%BF%86%E7%BF%BB%E7%89%8C%E8%BF%87%E5%95%A6%E9%85%8D%E5%AF%B9%E5%AE%8C%E6%88%90%E7%BB%8F%E5%85%B8%E6%8C%91%E6%88%98%E8%99%B9%E8%BF%9B%E9%98%B6%E7%83%AD%E8%BA%AB%EF%BC%8C%E6%A0%87%E5%87%86%E6%BB%A1%E7%BC%A4%E7%BA%B7%E6%9E%81%E8%87%B4%E6%A0%BC%E5%AD%90%E5%9C%B0%E7%8B%B1&display=swap" rel="stylesheet" />
     </noscript>
     <style>
       button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
@@ -206,9 +206,12 @@
          moves the board (装扮已改成整页的装扮页，不再是托盘) */
       .tray{
         display:none;
-        /* z-index sits above the pile tiles (their stacking order runs
-           up to tile count + 1, 73 on the biggest heap) so an open tray
-           is never covered by the heap underneath it */
+        /* z-index sits above the heap: the pile area is its own
+           stacking context (z-index:0 on .pile-area), so however
+           deep a tile's in-heap order runs (up to 900 on the
+           challenge heap) it can never climb out and cover an
+           open tray — all six level buttons stay visible and
+           tappable */
         position:absolute; top:72px; left:12px; z-index:90;
         max-width:min(88vw, 400px);
         background:var(--surface); border:1.5px solid var(--line); border-radius:14px;
@@ -477,6 +480,12 @@
       }
       .pile-area{
         position:relative; flex:1 1 auto; min-height:0;
+        /* z-index:0 给堆区自成一个层叠上下文：块的 z 随堆叠深度
+           一路排到 900（挑战堆），关在这一层里只决定块与块之间
+           的上下，整片堆在外面只按 0 层参与排队 — 关卡托盘
+           （z-90）因此永远完整压在堆上方、六个键都可点，不再
+           被高层块盖住。堆框的大小与位置分毫不变 */
+        z-index:0;
         background:var(--surface); border-radius:20px;
         box-shadow:inset 0 2px 12px rgba(74,64,44,.16);
         overflow:hidden;
@@ -545,6 +554,81 @@
       .ptile.covered{ filter:brightness(.66) saturate(.78); cursor:default; }
       .ptile.shake .face{ animation:ptshake .25s ease; }
       @keyframes ptshake{ 25%{ transform:translateX(-3px); } 75%{ transform:translateX(3px); } }
+
+      /* 挑战关道具动画（只加动画，规则不变，JS 里 reduced 时不启用）：
+         .flytile 是移出 / 组合用的飞行块——真块的克隆、挂在 body 下
+         fixed 定位按视口坐标飞，不受堆框 overflow 裁剪；长相照 .ptile
+         补齐（脸、厚度边、图片套的图），主题差异（果冻内阴影、图片套
+         透明底、玻璃图放大、奶蛙 0 号放大、图片套无厚度边、玻璃边
+         更圆）随主题类一并带上。.toolflash 是组合的第一段：目标块的
+         脸微微放大闪一下。.shufflewob 是打乱的第一段：块身靠 margin
+         轻轻浮起晃动（不动 transform，免得和定位打架），相位由 JS
+         给每块错开 */
+      .flytile{
+        position:fixed; left:0; top:0; padding:3px; box-sizing:border-box;
+        pointer-events:none; will-change:transform;
+      }
+      .flytile .face{
+        width:100%; height:100%;
+        border-radius:16px; border:2px solid transparent;
+        box-sizing:border-box; background-clip:padding-box;
+        position:relative; z-index:1;
+      }
+      .flytile .edge{
+        position:absolute; left:3px; right:3px; top:9px; bottom:-3px;
+        border-radius:16px; z-index:0;
+      }
+      .flytile .face .skin-img{
+        display:block; width:100%; height:100%;
+        object-fit:contain; pointer-events:none; -webkit-user-drag:none;
+      }
+      .flytile.jelly .face{ box-shadow: inset 0 9px 13px rgba(255,255,255,.5), inset 0 -11px 15px rgba(31,26,20,.12); }
+      .flytile.glassimg .face,
+      .flytile.eggimg .face,
+      .flytile.frogimg .face{ background:transparent; border-color:transparent; box-shadow:none; }
+      .flytile.glassimg .face .skin-img{ transform:scale(1.12); }
+      .flytile.frogimg[data-color="0"] .face .skin-img{ transform:scale(1.18); }
+      .flytile.glassimg .edge{ border-radius:28px; }
+      .flytile.eggimg .edge, .flytile.frogimg .edge{ display:none; }
+      .ptile.toolflash .face, .ttile.toolflash .face{ animation:toolflash .22s ease; }
+      @keyframes toolflash{
+        0%{ transform:scale(1); filter:brightness(1); }
+        45%{ transform:scale(1.15); filter:brightness(1.35); }
+        100%{ transform:scale(1); filter:brightness(1); }
+      }
+      .ptile.shufflewob{ animation:pshuffle .45s ease-in-out; }
+      @keyframes pshuffle{
+        0%{ margin-top:0; }
+        30%{ margin-top:-7px; }
+        55%{ margin-top:-3px; }
+        80%{ margin-top:-6px; }
+        100%{ margin-top:0; }
+      }
+
+      /* 挑战关道具组：贴在顶部栏里、紧挨「关卡」键右侧的紧凑
+         一组三键，只在挑战关出现（其余关卡与玩法 hidden）。它
+         住在顶栏里、不进面板，所以出现 / 消失都不占面板版面 —
+         堆框的大小和位置分毫不动；整组高度（圆 36px + 下方
+         小字）压在顶栏原有的 52px 之内，顶栏高度也不变。圆是
+         定稿的圆形图标原图；圆下面的功能名用游戏本身的深棕
+         字 — 白字在米色面板上看不清，以看得清为准。用过一次
+         后圆变灰、字变淡，再点无效（JS 里同步拦截）。顶栏本身
+         pointer-events:none，这里把整组的点击接回来 */
+      .pile-tools{ display:flex; gap:12px; pointer-events:auto; }
+      .pile-tools[hidden]{ display:none; }
+      .pile-tools .tool{ display:flex; flex-direction:column; align-items:center; gap:3px; }
+      .tool-btn{
+        width:36px; height:36px; border-radius:50%; padding:0; overflow:hidden;
+        background:var(--surface); border:1.5px solid var(--line);
+        box-shadow:0 2px 7px rgba(74,64,44,.20);
+        display:flex; align-items:center; justify-content:center;
+        -webkit-tap-highlight-color:transparent;
+      }
+      .tool-btn img{ display:block; width:100%; height:100%; object-fit:cover; pointer-events:none; -webkit-user-drag:none; }
+      .tool-btn:active{ transform:scale(.93); }
+      .tool-name{ font-size:.62rem; line-height:1.25; font-weight:600; color:var(--ink); white-space:nowrap; }
+      .pile-tools .tool.used .tool-btn{ filter:grayscale(1); opacity:.45; box-shadow:none; }
+      .pile-tools .tool.used .tool-name{ opacity:.45; }
 
       .slotbar{
         position:relative; flex:none; margin-top:10px;
@@ -776,6 +860,24 @@
       <div class="topbar">
         <div class="round-group">
           <button class="round-btn display" id="btnLevels" type="button" aria-expanded="false" aria-controls="trayLevels">关卡</button>
+          <!-- 挑战关专属道具组：紧挨关卡键右侧、同一行并排，只在
+               挑战关显示（dealPile / showGame 控制 hidden）；住在
+               顶栏里、不占面板版面，堆框的大小与位置不受它影响。
+               三个圆是定稿的图标原图，圆正下方小字标注功能 -->
+          <div class="pile-tools" id="pileTools" hidden>
+            <div class="tool" id="toolOutWrap">
+              <button class="tool-btn" id="toolOut" type="button" aria-label="道具：移出，把槽里最后一块退回堆里"><img src="aa0641b013b15.png" alt="" draggable="false" /></button>
+              <span class="tool-name">移出</span>
+            </div>
+            <div class="tool" id="toolCombineWrap">
+              <button class="tool-btn" id="toolCombine" type="button" aria-label="道具：组合，把一种颜色剩下的块全部消除"><img src="a2d31955f03c9.png" alt="" draggable="false" /></button>
+              <span class="tool-name">组合</span>
+            </div>
+            <div class="tool" id="toolShuffleWrap">
+              <button class="tool-btn" id="toolShuffle" type="button" aria-label="道具：打乱，把堆里剩下的块重新摆放"><img src="a312a94236673.png" alt="" draggable="false" /></button>
+              <span class="tool-name">打乱</span>
+            </div>
+          </div>
         </div>
         <div class="top-right">
           <span class="pile-left" id="pileLeftChip" role="status" aria-label="堆里剩余块数" hidden>剩余 <b id="pileLeft">0</b> 块</span>
@@ -818,6 +920,8 @@
 
       <!-- ============ 彩块堆消 ============ -->
       <section class="panel" id="panel-pile" aria-label="彩块堆消">
+        <!-- 挑战关的道具组在顶部栏里（关卡键右侧），不在面板内：
+             堆框因此始终是加道具之前的原大小与原位置 -->
         <div class="pile-frame">
           <div class="pile-area" id="pileArea" aria-label="彩块堆"></div>
         </div>
@@ -1013,8 +1117,12 @@
           document.getElementById("btnLevels").hidden = name === "memory";
           renderLevelTray();
           /* 堆消的剩余计数 pill 只在堆消时露面；记忆翻牌第一次
-             切过去才建牌（连同当前套的卡面卡背一起按需加载） */
+             切过去才建牌（连同当前套的卡面卡背一起按需加载）。
+             道具组住在顶栏里（不随面板一起藏），所以切玩法时要
+             在这里同步：只有堆消且当前关是挑战关才露面；堆消内
+             部换关时由 dealPile 再按关卡同步一次 */
           document.getElementById("pileLeftChip").hidden = name !== "pile";
+          pileTools.hidden = !(name === "pile" && !!PILE_LEVELS[P.level].tools);
           if(name === "memory" && !memBuilt) buildMemory();
           if(name === "blocks") requestAnimationFrame(fitBoard);
           if(name === "pile") requestAnimationFrame(function(){
@@ -1395,7 +1503,13 @@
           { name:"标准堆", sub:"45 块", colors:5, triples:3, slots:7 },
           { name:"满满堆", sub:"54 块", colors:6, triples:3, slots:7 },
           { name:"缤纷堆", sub:"63 块", colors:7, triples:3, slots:7 },
-          { name:"极致堆", sub:"72 块", colors:8, triples:3, slots:7 }
+          { name:"极致堆", sub:"72 块", colors:8, triples:3, slots:7 },
+          /* 挑战堆：900 块、8 色、共 300 组（每色 37 或 38 组
+             交错分配、尽量平均），槽仍 7 格；块的形状大小与其它
+             关完全一样，难度只来自块多、在同样的框里叠得更深；
+             tools 是本关专属的道具组（在顶栏关卡键右侧） —
+             前五关没有这个标记，玩法分毫不变 */
+          { name:"挑战堆", sub:"900 块", colors:8, triplesList:[38,37,38,37,38,37,38,37], slots:7, tools:true }
         ];
         var trayLevels = document.getElementById("trayLevels");
         /* pile game state （彩块堆消）: blocks carry fractional pile
@@ -1406,6 +1520,10 @@
           blocks:[],          /* {id, color, fx, fy, rot, z, el, gone, exposed} */
           tray:[],            /* {id, color, el} in slot order, left-filled */
           trayEls:{},
+          traySeq:[],         /* block ids in the order they entered the tray */
+          tools:{ out:false, combine:false, shuffle:false },  /* 挑战关道具：每局各用没用过 */
+          solution:[],        /* block ids in the order the built-in solution takes them */
+          dealNonce:0,        /* 打乱重排的种子计数：每次发牌 / 打乱递增 */
           slots:7, busy:false, over:false, triples:0, geom:null
         };
         function renderLevelTray(){
@@ -1888,6 +2006,7 @@
         var pileSlotbar = document.getElementById("pileSlotbar");
         var pileTrayLayer = document.getElementById("pileTrayLayer");
         var pileBanner = document.getElementById("pileBanner");
+        var pileTools = document.getElementById("pileTools");
 
         /* deterministic RNG so a level deals the same heap every time
            it is opened; replaying bumps the attempt and re-seeds */
@@ -1903,6 +2022,8 @@
 
         function pileTileSize(){
           var W = pileArea.clientWidth, H = pileArea.clientHeight;
+          /* 所有关同一套块尺寸，挑战堆也不例外：900 块就靠在
+             同样的框里累计重叠、叠得更深，不靠把块做小 */
           var tw = Math.max(46, Math.min(104, W * 0.20));
           return { tw:tw, th:tw * 1.15, W:W, H:H };
         }
@@ -1916,8 +2037,15 @@
         function dealPile(){
           var cfg = PILE_LEVELS[P.level];
           P.slots = cfg.slots;
-          P.tray = []; P.trayEls = {};
+          P.tray = []; P.trayEls = {}; P.traySeq = [];
           P.busy = false; P.over = false; P.triples = 0; P.dealt = true;
+          P.dealNonce++;
+          /* 道具组只属于挑战关：本关亮出来，并把三个道具复位
+             （每局各一次）；其它关藏起来。它在顶栏里，藏与露都
+             不动面板布局，堆框大小位置分毫不变 */
+          pileTools.hidden = !cfg.tools;
+          P.tools = { out:false, combine:false, shuffle:false };
+          syncToolBtns();
           pileTrayLayer.innerHTML = "";
           pileArea.innerHTML = "";
           pileBanner.classList.remove("show");
@@ -1929,17 +2057,55 @@
             slot.className = "slot";
             pileSlotbar.insertBefore(slot, pileTrayLayer);
           }
-          /* colours enter the heap only in whole triples, so the heap
-             can always be cleared three at a time */
+          /* guaranteed solvable, dealt backwards from a solution:
+             1) lay out a solution order — every triple as a run of
+                three of a colour, the triples themselves shuffled;
+             2) scatter the colours with many random adjacent swaps,
+                keeping only a swap a tray simulation proves safe:
+                walk the order feeding blocks into the tray (same
+                colour groups together, three clear), and never let
+                the uncleared leftovers (each colour's count mod 3,
+                summed) exceed slots-1, so following this order can
+                never fill the tray;
+             3) the heap is then stacked in reverse (in the block
+                creation below): the last block of the order is placed
+                first with the smallest z, the first block last with
+                the largest z — so when the order is followed, any
+                block covering the next one has already been taken */
           var rand = mulberry(4200 + P.level * 977 + P.attempt * 131);
-          var bag = [];
+          var groups = [];
           for(var c=0;c<cfg.colors;c++){
-            for(var t=0;t<cfg.triples*3;t++) bag.push(c);
+            /* 挑战关的组数按色分配（37 / 38 组交错，凑满 300 组），
+               其余关每色组数相同 */
+            var tc = cfg.triplesList ? cfg.triplesList[c] : cfg.triples;
+            for(var t=0;t<tc;t++) groups.push(c);
           }
-          for(var i=bag.length-1;i>0;i--){
+          for(var i=groups.length-1;i>0;i--){
             var j = Math.floor(rand() * (i + 1));
-            var tmp = bag[i]; bag[i] = bag[j]; bag[j] = tmp;
+            var tmp = groups[i]; groups[i] = groups[j]; groups[j] = tmp;
           }
+          var seq = [];
+          groups.forEach(function(c){ seq.push(c, c, c); });
+          function seqFits(s){
+            var counts = {}, pending = 0;
+            for(var k=0;k<s.length;k++){
+              var before = counts[s[k]] || 0;
+              counts[s[k]] = before + 1;
+              pending += (before % 3 === 2) ? -2 : 1;
+              if(pending > cfg.slots - 1) return false;
+            }
+            return true;
+          }
+          var swapTries = seq.length * 4;
+          for(var sw=0; sw<swapTries; sw++){
+            var p = Math.floor(rand() * (seq.length - 1));
+            if(seq[p] === seq[p + 1]) continue;
+            var t3 = seq[p]; seq[p] = seq[p + 1]; seq[p + 1] = t3;
+            if(!seqFits(seq)){
+              t3 = seq[p]; seq[p] = seq[p + 1]; seq[p + 1] = t3;
+            }
+          }
+          var bag = seq;
           /* scattered positions: one block per grid cell in shuffled
              order as a loose starting point, then jittered across the
              whole cell and pushed up to half a cell beyond it, so
@@ -1950,6 +2116,8 @@
              its real rotation, so the messier angles stay judged
              correctly */
           var n = bag.length;
+          /* 所有关同一套分布疏密，挑战关也不加密网格：900 块
+             照常撒满全框，重叠之深全来自块数本身 */
           var gc = Math.max(2, Math.ceil(Math.sqrt(n * 1.35)));
           var gr = Math.ceil(n / gc);
           var cells = [];
@@ -1966,7 +2134,9 @@
               fx: Math.min(1, Math.max(0, (cx + rand() + (rand() - 0.5) * 0.9) / gc)),
               fy: Math.min(1, Math.max(0, (cy + rand() + (rand() - 0.5) * 0.9) / gr)),
               rot: (rand() - 0.5) * 60,
-              z: idx, gone: false, exposed: false, el: null
+              /* reverse stacking: block idx of the solution order
+                 gets z = n-1-idx, so order position 0 sits on top */
+              z: n - 1 - idx, gone: false, exposed: false, el: null
             };
             var el = document.createElement("div");
             el.className = "ptile";
@@ -1987,6 +2157,10 @@
             pileArea.appendChild(el);
             return b;
           });
+          /* the built-in solution order is simply the bag order:
+             block ids ascend along it (kept for the tools and for
+             verification; gameplay itself never reads it) */
+          P.solution = P.blocks.map(function(b){ return b.id; });
           layoutPile(false);
           updatePileHUD();
         }
@@ -2106,11 +2280,63 @@
           if(!P.geom) return;
           var alive = P.blocks.filter(function(b){ return !b.gone; });
           var polys = alive.map(function(b){ return pileColorPoly(b); });
+          /* broad phase for the big heaps: each block's bounding
+             box goes into a uniform grid, and the exact SAT test
+             below only runs on pairs that share a cell. Two blocks
+             whose coloured shapes overlap must have intersecting
+             boxes, and intersecting boxes always share a cell — so
+             every verdict is identical to testing all pairs, just
+             without the quadratic blow-up at 900 blocks */
+          var boxes = polys.map(function(p){
+            var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            p.forEach(function(pt){
+              if(pt.x < minX) minX = pt.x;
+              if(pt.x > maxX) maxX = pt.x;
+              if(pt.y < minY) minY = pt.y;
+              if(pt.y > maxY) maxY = pt.y;
+            });
+            return { minX:minX, minY:minY, maxX:maxX, maxY:maxY };
+          });
+          var cell = 1;
+          boxes.forEach(function(bb){
+            cell = Math.max(cell, bb.maxX - bb.minX, bb.maxY - bb.minY);
+          });
+          function cellRange(bb){
+            return [
+              Math.floor(bb.minX / cell), Math.floor(bb.maxX / cell),
+              Math.floor(bb.minY / cell), Math.floor(bb.maxY / cell)
+            ];
+          }
+          var grid = {};
+          boxes.forEach(function(bb, i){
+            var r = cellRange(bb);
+            for(var gx = r[0]; gx <= r[1]; gx++){
+              for(var gy = r[2]; gy <= r[3]; gy++){
+                var key = gx + ":" + gy;
+                if(!grid[key]) grid[key] = [];
+                grid[key].push(i);
+              }
+            }
+          });
+          var seen = new Int32Array(alive.length);
+          var mark = 0;
           alive.forEach(function(b, bi){
             var exposed = true;
-            for(var i = 0; i < alive.length; i++){
-              if(alive[i].z <= b.z) continue;
-              if(polysOverlap(polys[bi], polys[i])){ exposed = false; break; }
+            mark++;
+            var r = cellRange(boxes[bi]);
+            outer:
+            for(var gx = r[0]; gx <= r[1]; gx++){
+              for(var gy = r[2]; gy <= r[3]; gy++){
+                var list = grid[gx + ":" + gy];
+                if(!list) continue;
+                for(var li = 0; li < list.length; li++){
+                  var i = list[li];
+                  if(i === bi || seen[i] === mark) continue;
+                  seen[i] = mark;
+                  if(alive[i].z <= b.z) continue;
+                  if(polysOverlap(polys[bi], polys[i])){ exposed = false; break outer; }
+                }
+              }
             }
             b.exposed = exposed;
             b.el.classList.toggle("covered", !exposed);
@@ -2265,6 +2491,7 @@
           b.gone = true;
           b.el.remove();
           P.tray.splice(insertIdx, 0, { id: b.id, color: b.color });
+          P.traySeq.push(b.id);
           renderTray(true);
           computeExposed();
           updatePileHUD();
@@ -2280,10 +2507,11 @@
           var hit = null;
           Object.keys(counts).forEach(function(k){ if(counts[k] >= 3) hit = parseInt(k, 10); });
           if(hit === null){ P.busy = false; checkPileEnd(); return; }
-          var removed = 0;
+          var removed = 0, removedIds = [];
           P.tray = P.tray.filter(function(item){
             if(item.color === hit && removed < 3){
               removed++;
+              removedIds.push(item.id);
               var el = P.trayEls[item.id];
               if(el){
                 var m = /translate\((-?[\d.]+)px,(-?[\d.]+)px\)/.exec(el.style.transform || "");
@@ -2297,6 +2525,9 @@
             }
             return true;
           });
+          if(removedIds.length){
+            P.traySeq = P.traySeq.filter(function(id){ return removedIds.indexOf(id) < 0; });
+          }
           P.triples++;
           sndPair();
           updatePileHUD();
@@ -2331,6 +2562,398 @@
             pileBanner.classList.add("show");
           }
         }
+
+        /* ================= 挑战关道具（移出 / 组合 / 打乱） =================
+           只在挑战关亮出来（dealPile 按 cfg.tools 控制道具组的
+           hidden），每个道具每局只能用一次：用过后整颗变灰、
+           字变淡、再点无效；重开本关（attempt++ 后重新发牌）
+           三个道具一起复位。不满足使用条件时点了不消耗次数 —
+           所以每个道具都先验条件、再标记已用 */
+        var toolWraps = {
+          out: document.getElementById("toolOutWrap"),
+          combine: document.getElementById("toolCombineWrap"),
+          shuffle: document.getElementById("toolShuffleWrap")
+        };
+        function syncToolBtns(){
+          Object.keys(toolWraps).forEach(function(k){
+            var w = toolWraps[k];
+            if(!w) return;
+            var used = !!P.tools[k];
+            w.classList.toggle("used", used);
+            w.querySelector(".tool-btn").setAttribute("aria-disabled", String(used));
+          });
+        }
+
+        /* 槽位模拟（从已有槽内计数起算）：照顺序往槽里放块，
+           未凑齐的零头总数永不超过 slots-1、且最后正好清空，
+           这条顺序就是走得通的。dealPile 里从空槽起算的 seqFits
+           是它 start 为空的特例，公式同一套 */
+        function seqFitsFrom(s, start, slots){
+          var counts = {}, pending = 0, k;
+          for(k in start){ counts[k] = start[k]; pending += start[k]; }
+          for(var i=0;i<s.length;i++){
+            var before = counts[s[i]] || 0;
+            counts[s[i]] = before + 1;
+            pending += (before % 3 === 2) ? -2 : 1;
+            if(pending > slots - 1) return false;
+          }
+          return pending === 0;
+        }
+
+        /* ---- 道具动画共用：飞行块（移出 / 组合） ----
+           把一块真块（堆里的 .ptile 或槽里的 .ttile）克隆成挂在
+           body 下的飞行块：fixed 定位、视口坐标，飞行途中不受
+           堆框 overflow 裁剪；带上当前主题类，.flytile 的 CSS
+           把长相补成与真块一致。起点取源块此刻的真实位置 —
+           旋转着的堆块用它的布局尺寸、再按包围盒中心对齐，
+           不把旋转包围盒当成块身 */
+        function makeFlyer(srcEl, rotFrom){
+          var fly = srcEl.cloneNode(true);
+          fly.removeAttribute("id");
+          fly.classList.remove("ptile", "ttile", "covered", "shake", "toolflash");
+          fly.classList.add("flytile");
+          ["jelly", "glassimg", "eggimg", "frogimg"].forEach(function(c){
+            if(pileArea.classList.contains(c)) fly.classList.add(c);
+          });
+          var r = srcEl.getBoundingClientRect();
+          var w = srcEl.offsetWidth || r.width;
+          var h = srcEl.offsetHeight || r.height;
+          var x = r.left + (r.width - w) / 2;
+          var y = r.top + (r.height - h) / 2;
+          fly.style.transition = "none";
+          fly.style.margin = "0";
+          fly.style.opacity = "1";
+          fly.style.zIndex = "90";
+          fly.style.width = w + "px";
+          fly.style.height = h + "px";
+          fly.style.transform = "translate(" + x + "px," + y + "px) rotate(" + (rotFrom || 0) + "deg)";
+          document.body.appendChild(fly);
+          return { el: fly, x: x, y: y, w: w, h: h, rot: rotFrom || 0 };
+        }
+
+        /* 沿一道小弧线飞到目标：中点抬到起终点较高处再往上
+           一点，尺寸与转角同步插值。pop 为真时收尾缩小淡出
+           （组合的成组消散），否则稳稳落到目标尺寸与转角
+           （移出的落位）。播完（或保险丝超时）移除飞行块并
+           回调一次 */
+        function flyArc(f, o, done){
+          var mx = (f.x + o.x) / 2;
+          var my = Math.min(f.y, o.y) - Math.max(24, Math.abs(o.y - f.y) * 0.22);
+          var endT = "translate(" + o.x + "px," + o.y + "px) rotate(" + o.rot + "deg)" + (o.pop ? " scale(.15)" : "");
+          var fin = false;
+          function end(){
+            if(fin) return;
+            fin = true;
+            f.el.remove();
+            if(done) done();
+          }
+          var anim = null;
+          try{
+            anim = f.el.animate([
+              { transform: "translate(" + f.x + "px," + f.y + "px) rotate(" + f.rot + "deg)", width: f.w + "px", height: f.h + "px", opacity: "1" },
+              { transform: "translate(" + mx + "px," + my + "px) rotate(" + ((f.rot + o.rot) / 2) + "deg)", width: ((f.w + o.w) / 2) + "px", height: ((f.h + o.h) / 2) + "px", opacity: "1", offset: 0.55 },
+              { transform: endT, width: o.w + "px", height: o.h + "px", opacity: o.pop ? "0" : "1" }
+            ], { duration: o.dur, easing: "cubic-bezier(.33,.7,.3,1)", fill: "forwards" });
+          }catch(e){ anim = null; }
+          if(anim) anim.onfinish = end;
+          else { end(); return; }
+          setTimeout(end, o.dur + 150);
+        }
+
+        /* 移出：槽里最后一块（最后进槽的那块）退回它原来在堆里
+           的位置与层级 — fx / fy / rot / z 从发牌起就没动过，
+           块一回去，压住关系由 computeExposed 重新判定。槽为空
+           时不可用、不消耗 */
+        function toolOut(){
+          if(P.busy || P.over || P.tools.out) return;
+          if(!P.traySeq.length) return;
+          var id = P.traySeq[P.traySeq.length - 1];
+          var ti = -1, b = null, i;
+          for(i=0;i<P.tray.length;i++) if(P.tray[i].id === id){ ti = i; break; }
+          if(ti < 0) return;
+          for(i=0;i<P.blocks.length;i++) if(P.blocks[i].id === id){ b = P.blocks[i]; break; }
+          if(!b) return;
+          P.tools.out = true;
+          syncToolBtns();
+          var nonce = P.dealNonce;
+          if(reduced || !P.geom){
+            P.tray.splice(ti, 1);
+            P.traySeq.pop();
+            b.gone = false;
+            pileArea.appendChild(b.el);
+            if(P.solution.indexOf(id) < 0) P.solution.unshift(id);
+            layoutPile(false);
+            updatePileHUD();
+            sndInsert();
+            return;
+          }
+          /* 动画版：先把槽里那块克隆成飞行块，再把它从槽数据
+             里拿走、让其余槽块照常滑动补位；飞行块沿一道小
+             弧线飞回它在堆里的原位（原 fx / fy / rot 从没动
+             过），落定那一刻才把真块放回去并重判压住关系
+             （变暗 / 变亮随之刷新），落位声也在落定那一刻响。
+             全程约 440ms，busy 锁住点击 */
+          P.busy = true;
+          var fly = null;
+          if(P.trayEls[id]) fly = makeFlyer(P.trayEls[id], 0);
+          P.tray.splice(ti, 1);
+          P.traySeq.pop();
+          if(P.solution.indexOf(id) < 0) P.solution.unshift(id);
+          renderTray(true);
+          var pr = pileRect(b);
+          var pa = pileArea.getBoundingClientRect();
+          function land(){
+            if(P.dealNonce !== nonce) return;   /* 飞行中重开了本关：新局自有状态，飞行块已被 flyArc 收走 */
+            b.gone = false;
+            pileArea.appendChild(b.el);
+            layoutPile(false);
+            updatePileHUD();
+            sndInsert();
+            P.busy = false;
+          }
+          if(fly){
+            flyArc(fly, { x: pa.left + pr.x, y: pa.top + pr.y, w: pr.w, h: pr.h, rot: b.rot || 0, dur: 440, pop: false }, land);
+          } else {
+            land();
+          }
+        }
+
+        /* 组合：把目标颜色剩下的块（槽里 + 堆里）全部消除。
+           目标颜色：槽里有块时取槽里块数最多的颜色，并列取
+           最早进槽的那个；槽为空时取堆顶最上面那块露着的块
+           的颜色。剩下的总数必是 3 的倍数（总数按组发、已消的
+           也按组计），组数照常累计，之后照常判胜负 */
+        function toolCombine(){
+          if(P.busy || P.over || P.tools.combine) return;
+          var target = null;
+          if(P.tray.length){
+            var counts = {}, colorOf = {}, firstAt = {};
+            P.tray.forEach(function(t){
+              counts[t.color] = (counts[t.color] || 0) + 1;
+              colorOf[t.id] = t.color;
+            });
+            P.traySeq.forEach(function(id, i){
+              var c = colorOf[id];
+              if(c !== undefined && firstAt[c] === undefined) firstAt[c] = i;
+            });
+            Object.keys(counts).forEach(function(k){
+              var c = parseInt(k, 10);
+              if(target === null || counts[c] > counts[target] ||
+                 (counts[c] === counts[target] && firstAt[c] < firstAt[target])) target = c;
+            });
+          } else {
+            var top = null;
+            P.blocks.forEach(function(b){
+              if(b.gone || !b.exposed) return;
+              if(!top || b.z > top.z) top = b;
+            });
+            if(top) target = top.color;
+          }
+          if(target === null) return;   /* 没得消：不消耗 */
+          var heap = P.blocks.filter(function(b){ return !b.gone && b.color === target; });
+          var inTray = P.tray.filter(function(t){ return t.color === target; });
+          var total = heap.length + inTray.length;
+          if(!total) return;
+          P.tools.combine = true;
+          syncToolBtns();
+          P.busy = true;
+          var nonce = P.dealNonce;
+          /* 结算（动画播完才走，和 reduced 时的同步收尾共用）：
+             目标色从堆与槽里彻底清掉、组数累计、压住关系重判，
+             其余槽块滑动补位，之后照常判胜负 */
+          function settleCombine(){
+            if(P.dealNonce !== nonce) return;   /* 动画中重开了本关：新局自有状态 */
+            heap.forEach(function(b){ b.gone = true; b.el.remove(); });
+            var trayGone = {};
+            inTray.forEach(function(t){
+              trayGone[t.id] = true;
+              var el = P.trayEls[t.id];
+              if(el){ el.remove(); delete P.trayEls[t.id]; }
+            });
+            P.tray = P.tray.filter(function(t){ return !trayGone[t.id]; });
+            P.traySeq = P.traySeq.filter(function(id){ return !trayGone[id]; });
+            var colorById = {};
+            P.blocks.forEach(function(b){ colorById[b.id] = b.color; });
+            P.solution = P.solution.filter(function(id){ return colorById[id] !== target; });
+            P.triples += total / 3;
+            sndPair();
+            computeExposed();
+            updatePileHUD();
+            renderTray(true);
+            setTimeout(function(){
+              if(P.dealNonce !== nonce) return;
+              P.busy = false;
+              checkPileEnd();
+            }, reduced ? 0 : 230);
+          }
+          if(reduced){
+            settleCombine();
+            return;
+          }
+          /* 动画：目标色在槽里和堆里的全部块先一起微微放大闪
+             一下（.toolflash 约 220ms），随即各自克隆成飞行块、
+             真块藏起来，全部同时汇聚飞向堆中心上方一点，收尾
+             成组缩小淡出（约 260ms，和槽里凑齐消除的 pop 一个
+             收法）；飞完才走上面的结算。全程 busy 锁点击 */
+          var flashEls = [];
+          heap.forEach(function(b){ flashEls.push(b.el); });
+          inTray.forEach(function(t){ if(P.trayEls[t.id]) flashEls.push(P.trayEls[t.id]); });
+          flashEls.forEach(function(el){ el.classList.add("toolflash"); });
+          setTimeout(function(){
+            if(P.dealNonce !== nonce) return;
+            flashEls.forEach(function(el){ el.classList.remove("toolflash"); });
+            var areaR = pileArea.getBoundingClientRect();
+            var cx = areaR.left + areaR.width / 2;
+            var cy = areaR.top + areaR.height * 0.30;
+            var flyers = [];
+            heap.forEach(function(b){
+              flyers.push(makeFlyer(b.el, b.rot || 0));
+              b.el.style.visibility = "hidden";
+            });
+            inTray.forEach(function(t){
+              var el = P.trayEls[t.id];
+              if(!el) return;
+              flyers.push(makeFlyer(el, 0));
+              el.style.visibility = "hidden";
+            });
+            if(!flyers.length){ settleCombine(); return; }
+            var pending = flyers.length;
+            flyers.forEach(function(f){
+              flyArc(f, {
+                x: cx - f.w / 2, y: cy - f.h / 2, w: f.w, h: f.h,
+                rot: 0, dur: 260, pop: true
+              }, function(){
+                pending--;
+                if(pending <= 0) settleCombine();
+              });
+            });
+          }, 220);
+        }
+
+        /* 打乱：把堆里剩下的块按当前槽内状态重新生成一局保证
+           有解的摆放 — 新顺序从槽里已有的各色计数起算做槽位
+           模拟（先补齐槽里的零头，再三连成组，随机相邻交换只
+           收模拟证明安全的），位置照常重新随机，层级
+           照旧倒序堆放。槽里的块和已消的组数都不动 */
+        function toolShuffle(){
+          if(P.busy || P.over || P.tools.shuffle) return;
+          var alive = P.blocks.filter(function(b){ return !b.gone; });
+          if(!alive.length) return;   /* 堆里没块可打乱：不消耗 */
+          var cfg = PILE_LEVELS[P.level];
+          P.tools.shuffle = true;
+          syncToolBtns();
+          P.dealNonce++;
+          var rand = mulberry(91000 + P.level * 31337 + P.attempt * 131 + P.dealNonce * 104729);
+          var start = {};
+          P.tray.forEach(function(t){ start[t.color] = (start[t.color] || 0) + 1; });
+          var byColor = {};
+          alive.forEach(function(b){
+            if(!byColor[b.color]) byColor[b.color] = [];
+            byColor[b.color].push(b);
+          });
+          function needOf(c){ return (3 - ((start[c] || 0) % 3)) % 3; }
+          var seq = [];
+          /* 先补齐槽里的零头：差 1 块凑齐的先补（只会让槽变空），
+             差 2 块的后补（先涨一格再清空） */
+          var need1 = [], need2 = [];
+          Object.keys(byColor).forEach(function(k){
+            var c = parseInt(k, 10);
+            if(needOf(c) === 1) need1.push(c);
+            else if(needOf(c) === 2) need2.push(c);
+          });
+          need1.forEach(function(c){ seq.push(c); });
+          need2.forEach(function(c){ seq.push(c, c); });
+          /* 其余的按三连成组、组间洗牌，和发牌时同一套路。
+             每色剩下的块数 = 堆里总数 − 补零头的，必是 3 的倍数 */
+          var groups = [];
+          Object.keys(byColor).forEach(function(k){
+            var c = parseInt(k, 10);
+            var rest = byColor[c].length - needOf(c);
+            for(var t=0;t<rest/3;t++) groups.push(c);
+          });
+          for(var i=groups.length-1;i>0;i--){
+            var j = Math.floor(rand() * (i + 1));
+            var tmp = groups[i]; groups[i] = groups[j]; groups[j] = tmp;
+          }
+          groups.forEach(function(c){ seq.push(c, c, c); });
+          /* 随机相邻交换打散，只收槽位模拟证明安全的交换。
+             万一当前槽况本身已经无解（零头占满槽又互不相同，
+             怎么点都输），补齐顺序也过不了模拟 — 那就照原样
+             打乱摆放，不再校验 */
+          if(seqFitsFrom(seq, start, cfg.slots)){
+            var swapTries = seq.length * 4;
+            for(var sw=0; sw<swapTries; sw++){
+              var p = Math.floor(rand() * (seq.length - 1));
+              if(seq[p] === seq[p + 1]) continue;
+              var t3 = seq[p]; seq[p] = seq[p + 1]; seq[p + 1] = t3;
+              if(!seqFitsFrom(seq, start, cfg.slots)){
+                t3 = seq[p]; seq[p] = seq[p + 1]; seq[p + 1] = t3;
+              }
+            }
+          }
+          /* 照新顺序重新摆位：位置重新随机（与发牌同一套全框
+             分布），层级倒序 — 顺序里越靠前的块层级越高，照
+             顺序拿时压住它的块必定先被拿走 */
+          var n = seq.length;
+          var gc = Math.max(2, Math.ceil(Math.sqrt(n * 1.35)));
+          var gr = Math.ceil(n / gc);
+          var cells = [];
+          for(var k2=0;k2<gc*gr;k2++) cells.push(k2);
+          for(var i2=cells.length-1;i2>0;i2--){
+            var j2 = Math.floor(rand() * (i2 + 1));
+            var t2 = cells[i2]; cells[i2] = cells[j2]; cells[j2] = t2;
+          }
+          var pools = {};
+          Object.keys(byColor).forEach(function(k){ pools[k] = byColor[k].slice(); });
+          P.solution = [];
+          seq.forEach(function(c, idx){
+            var b = pools[c].pop();
+            var cell = cells[idx];
+            var cx = cell % gc, cy = Math.floor(cell / gc);
+            b.fx = Math.min(1, Math.max(0, (cx + rand() + (rand() - 0.5) * 0.9) / gc));
+            b.fy = Math.min(1, Math.max(0, (cy + rand() + (rand() - 0.5) * 0.9) / gr));
+            b.rot = (rand() - 0.5) * 60;
+            b.z = n - 1 - idx;
+            P.solution.push(b.id);
+          });
+          if(reduced){
+            layoutPile(true);
+            sndFlip();
+            return;
+          }
+          /* 动画：新摆放（上面刚算好的、按当前槽况保证有解的
+             那一局）先不落位——堆里剩下的块先原地整体轻轻浮起、
+             错落晃动约 450ms（.shufflewob 靠 margin 浮起，每块
+             一个固定的错开相位与滑行延时），再由 layoutPile(true)
+             的过渡平滑滑到新位置落定、压住关系随之刷新。全程
+             busy 锁点击，洗牌声沿用翻牌声 */
+          P.busy = true;
+          sndFlip();
+          var nonce = P.dealNonce;
+          var ordered = alive.slice().sort(function(a, b){ return a.id - b.id; });
+          ordered.forEach(function(b, i){
+            b.el.style.transitionDelay = ((i * 37) % 120) + "ms";
+            b.el.style.animationDelay = (-((i * 53) % 200)) + "ms";
+            b.el.classList.add("shufflewob");
+          });
+          setTimeout(function(){
+            if(P.dealNonce !== nonce) return;   /* 晃动中重开了本关：新局自有状态 */
+            alive.forEach(function(b){ b.el.classList.remove("shufflewob"); });
+            layoutPile(true);
+            setTimeout(function(){
+              alive.forEach(function(b){
+                b.el.style.transitionDelay = "";
+                b.el.style.animationDelay = "";
+              });
+              if(P.dealNonce !== nonce) return;
+              P.busy = false;
+            }, 440);
+          }, 450);
+        }
+
+        document.getElementById("toolOut").addEventListener("click", toolOut);
+        document.getElementById("toolCombine").addEventListener("click", toolCombine);
+        document.getElementById("toolShuffle").addEventListener("click", toolShuffle);
 
         document.getElementById("pileAgainBtn").addEventListener("click", function(){
           P.attempt++;
