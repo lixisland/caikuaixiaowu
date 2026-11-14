@@ -2178,8 +2178,9 @@
         var pileBanner = document.getElementById("pileBanner");
         var pileTools = document.getElementById("pileTools");
 
-        /* deterministic RNG so a level deals the same heap every time
-           it is opened; replaying bumps the attempt and re-seeds */
+        /* seeded RNG drives the deal; every deal draws a fresh
+           random seed, so reopening or replaying a level never
+           repeats the same heap — only the level's counts stay fixed */
         function mulberry(seed){
           var a = seed >>> 0;
           return function(){
@@ -2242,7 +2243,7 @@
                 first with the smallest z, the first block last with
                 the largest z — so when the order is followed, any
                 block covering the next one has already been taken */
-          var rand = mulberry(4200 + P.level * 977 + P.attempt * 131);
+          var rand = mulberry((Math.random() * 4294967296) >>> 0);
           var groups = [];
           for(var c=0;c<cfg.colors;c++){
             /* 挑战关的组数按色分配（37 / 38 组交错，凑满 300 组），
@@ -3013,7 +3014,7 @@
           P.tools.shuffle = true;
           syncToolBtns();
           P.dealNonce++;
-          var rand = mulberry(91000 + P.level * 31337 + P.attempt * 131 + P.dealNonce * 104729);
+          var rand = mulberry((Math.random() * 4294967296) >>> 0);
           var start = {};
           P.tray.forEach(function(t){ start[t.color] = (start[t.color] || 0) + 1; });
           var byColor = {};
